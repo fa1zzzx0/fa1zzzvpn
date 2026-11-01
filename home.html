@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>fa1zzz</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070D;--card:#14141D;--acc:#A34DFF;--pink:#FF4D9D;--txt:#fff;--mut:#8b8b9e;--line:#24242f;--g:linear-gradient(90deg,var(--acc),var(--pink));box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#07070D}}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--txt);font-family:Manrope,system-ui,-apple-system,Segoe UI,sans-serif}
+#app{max-width:480px;margin:0 auto;height:100%;display:flex;flex-direction:column;position:relative}
+main{flex:1;overflow-y:auto;padding:18px 16px 130px}
+.view{animation:in .28s ease}@keyframes in{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:30px;padding:20px;margin-bottom:14px}
+h1{font-size:26px;font-weight:800;letter-spacing:-.5px}h2{font-size:13px;color:var(--mut);font-weight:700;letter-spacing:.06em;margin:20px 6px 10px}
+.mut{color:var(--mut);font-size:13px}.row{display:flex;align-items:center;gap:12px}.sp{justify-content:space-between}
+.btn{width:100%;border:0;border-radius:24px;padding:17px;font:800 16px Manrope,sans-serif;color:#fff;background:var(--g);cursor:pointer;transition:transform .12s,opacity .2s}
+.btn:active{transform:scale(.98)}.btn[disabled]{opacity:.6}
+.btn.ghost{background:#1d1d29}
+.pill{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;background:#2a1b3d;color:#c88bff}
+.pill.off{background:#3a1c26;color:#ff7a95}
+.plan{position:relative;border-radius:28px;padding:18px 20px;margin-bottom:12px;background:var(--card);border:2px solid transparent;cursor:pointer;display:flex;align-items:center;gap:14px;transition:.2s}
+.plan.sel{background:linear-gradient(var(--card),var(--card)) padding-box,var(--g) border-box}
+.plan b{font-size:18px}.plan .pr{margin-left:auto;text-align:right}.plan .pr b{display:block;font-size:20px}
+.sw{width:46px;height:26px;border-radius:14px;background:#2b2b38;position:relative;flex:none;transition:.2s}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#777;transition:.2s}
+.sel .sw{background:var(--g)}.sel .sw::after{left:23px;background:#fff}
+.disc{font-size:11px;font-weight:800;background:var(--g);padding:3px 8px;border-radius:10px;margin-left:8px}
+.big{font-size:56px;font-weight:800;line-height:1;background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.slots{display:flex;gap:10px;margin:14px 0 18px}.slot{flex:1;aspect-ratio:1;border-radius:50%;background:#1d1d29;border:2px dashed #34344a;display:grid;place-items:center;font-weight:800;font-size:13px}
+.slot.on{background:var(--g);border:0}
+.ava{width:44px;height:44px;border-radius:50%;background:var(--g);display:grid;place-items:center;font-weight:800;flex:none}
+.empty{text-align:center;padding:34px 10px}.empty svg{opacity:.5;margin-bottom:8px}
+.stat{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stat .card{margin:0}.stat b{font-size:26px;display:block;margin-top:6px}
+input{width:100%;background:#1d1d29;border:1px solid var(--line);border-radius:20px;padding:15px 16px;color:#fff;font:600 15px Manrope,sans-serif;outline:0}
+input:focus{border-color:var(--acc)}
+.item{display:flex;align-items:center;gap:12px;padding:16px 4px;border-bottom:1px solid var(--line);cursor:pointer;font-weight:700}.item:last-child{border:0}
+.x{margin-left:auto;background:#2a1b24;color:#ff7a95;border:0;border-radius:14px;padding:8px 12px;font:700 12px Manrope;cursor:pointer}
+nav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:480px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(12,12,20,.92);backdrop-filter:blur(16px);display:flex;border-top:1px solid var(--line);z-index:5}
+nav button{flex:1;background:none;border:0;color:var(--mut);font:700 11px Manrope;display:flex;flex-direction:column;align-items:center;gap:5px;padding:6px;cursor:pointer;transition:.2s}
+nav button.on{color:#fff}nav button.on svg{stroke:var(--acc)}
+svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:flex-end;justify-content:center;z-index:10;animation:fd .2s}
+.sheet{background:var(--card);width:100%;max-width:480px;border-radius:34px 34px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom,0px));animation:up .3s}
+@keyframes fd{from{opacity:0}}@keyframes up{from{transform:translateY(60px)}}
+.key{background:#0c0c14;border-radius:18px;padding:14px;font:12px ui-monospace,monospace;word-break:break-all;color:#cfa5ff;margin:12px 0}
+.toast{position:fixed;top:calc(16px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);background:#222232;padding:12px 18px;border-radius:18px;font-weight:700;font-size:14px;z-index:20;animation:fd .2s}
+.sk{height:120px;border-radius:30px;background:linear-gradient(90deg,#14141d 25%,#1d1d29 50%,#14141d 75%);background-size:200%;animation:sh 1.2s infinite;margin-bottom:14px}@keyframes sh{to{background-position:-200%}}
+.theme{width:46px;height:46px;border-radius:50%;border:3px solid transparent;cursor:pointer}.theme.on{border-color:#fff}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<div id="app"><main id="v"></main>
+<nav id="nav"></nav></div>
+<script>
+const I={
+ tag:'<svg viewBox="0 0 24 24"><path d="M3 12l9-9h8v8l-9 9z"/><circle cx="15.5" cy="8.5" r="1.2"/></svg>',
+ gift:'<svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4"/><path d="M5 12v9h14v-9M12 8v13M12 8S10 3 7.5 4.5 8 8 12 8zm0 0s2-5 4.500-3.500S16 8 12 8z"/></svg>',
+ users:'<svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.500 20c.5-4 3-6 6.500-6s6 2 6.500 6M16 4.500a3.500 3.500 0 010 7M18 14c2 .6 3.500 2.500 4 6"/></svg>',
+ user:'<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c.7-4.500 4-7 8-7s7.300 2.500 8 7"/></svg>',
+ empty:'<svg viewBox="0 0 24 24" style="width:48px;height:48px"><circle cx="9" cy="8" r="3.500"/><path d="M2.500 20c.5-4 3-6 6.500-6s6 2 6.500 6"/></svg>'};
+const tg=window.Telegram&&Telegram.WebApp;const tu=tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user;
+const PLANS=[{id:1,t:'1 месяц',p:100,m:100,d:30,off:0},{id:3,t:'3 месяца',p:270,m:90,d:90,off:10},{id:12,t:'1 год',p:960,m:80,d:365,off:20}];
+const S={tab:0,plan:3,sub:null,key:null,loading:true,ref:{days:0,list:[]},friends:[],devices:1,user:{name:tu?tu.first_name:'Гость',id:tu?tu.id:'000000000'},theme:'#A34DFF',paid:[]};
+const T=['Тарифы','Рефералка','Друзья','Профиль'],IC=['tag','gift','users','user'];
+const $=s=>document.querySelector(s);
+const days=()=>S.sub?Math.max(0,Math.ceil((S.sub.end-Date.now())/864e5)):0;
+const fmt=d=>new Date(d).toLocaleDateString('ru-RU');
+const refLink=()=>'https://t.me/fa1zzz_bot?start=ref_'+S.user.id;
+const shareLink=()=>'https://t.me/fa1zzz_bot?start=join_'+S.user.id;
+function toast(t){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),2000)}
+function copy(t){try{navigator.clipboard.writeText(t)}catch(e){}toast('Скопировано')}
+function share(url,text){const u='https://t.me/share/url?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text);tg&&tg.openTelegramLink?tg.openTelegramLink(u):window.open(u,'_blank')}
+function modal(h){const m=document.createElement('div');m.className='modal';m.innerHTML='<div class="sheet">'+h+'</div>';m.onclick=e=>{if(e.target===m)m.remove()};document.body.appendChild(m);return m}
+function nav(){$('#nav').innerHTML=T.map((t,i)=>`<button class="${i==S.tab?'on':''}" onclick="go(${i})">${I[IC[i]]}${t}</button>`).join('')}
+function go(i){S.tab=i;nav();render()}
+function render(){
+ const v=$('#v');if(S.loading){v.innerHTML='<div class="sk"></div><div class="sk"></div><div class="sk"></div>';return}
+ v.innerHTML='<div class="view">'+[tariffs,referral,friends,profile][S.tab]()+'</div>'}
+function tariffs(){const a=days()>0;return `<div class="row sp" style="margin:4px 6px 16px"><h1>fa1zzz</h1><span class="pill">VPN</span></div>
+<div class="card"><div class="row sp"><b>Ваша подписка</b><span class="pill ${a?'':'off'}">${a?'Активна':'Истекла'}</span></div>
+<div class="big" style="margin:14px 0 4px">${days()}</div><div class="mut">${a?'дней осталось · до '+fmt(S.sub.end):'Подписки пока нет — выберите тариф ниже'}</div>
+<div class="mut" style="margin-top:10px">Подключение через HAPP · до 5 устройств · безлимит</div>
+${a?'<button class="btn" style="margin-top:14px" onclick="showKey()">Получить VPN-ключ</button>':''}</div>
+<h2>ТАРИФЫ</h2>${PLANS.map(p=>`<div class="plan ${p.id==S.plan?'sel':''}" onclick="S.plan=${p.id};render()"><div><b>${p.t}</b>${p.off?`<span class="disc">−${p.off}%</span>`:''}<div class="mut" style="margin-top:4px">${p.m} ₽ в месяц</div></div><div class="pr"><b>${p.p} ₽</b></div><div class="sw"></div></div>`).join('')}
+<button class="btn" id="pay" onclick="pay()">Подключить</button>`}
+function pay(){const p=PLANS.find(x=>x.id==S.plan),b=$('#pay');b.disabled=true;b.textContent='Ждём подтверждение оплаты…';
+ setTimeout(()=>{ // DEMO: в продакшене активирует только серверный webhook
+  const base=days()>0?S.sub.end:Date.now();S.sub={end:base+p.d*864e5,plan:p.t};
+  S.key=S.key||'vless://'+crypto.randomUUID()+'@vpn.example.com:443?type=tcp&security=reality#fa1zzz';
+  S.paid.push({p,at:Date.now()});toast('Оплата прошла, подписка активна');render();showKey()},1400)}
+function showKey(){const m=modal(`<h1 style="font-size:22px">Ваш VPN-ключ</h1><div class="mut" style="margin-top:6px">Демо-ключ. Рабочие ключи выдаёт сервер через панель VPN.</div><div class="key">${S.key}</div>
+<button class="btn" id="c1">Скопировать</button><button class="btn ghost" style="margin-top:10px" id="c2">Открыть в HAPP</button>`);
+ m.querySelector('#c1').onclick=()=>copy(S.key);m.querySelector('#c2').onclick=()=>{location.href='happ://add/'+S.key}}
+function referral(){return `<div class="card" style="text-align:center"><div class="mut" style="font-weight:700;letter-spacing:.08em">ПОЛУЧЕНО</div><div class="big" style="margin:10px 0">${S.ref.days}</div><div class="mut">дней</div>
+<div style="text-align:left;margin:18px 0;line-height:1.9;font-size:14px">Друг активировал пробный период: <b>+2 дня</b><br>Купил подписку впервые: <b>+10 дней</b><br>Продлил подписку: <b>+5 дней</b></div>
+<button class="btn" onclick="inv()">Пригласить друга</button></div>
+<h2>ВАШИ ДРУЗЬЯ</h2>${S.ref.list.length?`<div class="card">${S.ref.list.map(f=>`<div class="item" style="cursor:default"><div class="ava">${f.n[0]}</div><div><div>${f.n}</div><div class="mut">${f.s}</div></div><span class="pill" style="margin-left:auto">+${f.d} дн.</span></div>`).join('')}</div>`:`<div class="card empty">${I.empty}<div>Пока никого нет</div><div class="mut" style="margin-top:4px">Отправьте ссылку — бонусные дни начислятся автоматически</div></div>`}`}
+function inv(){const m=modal(`<h1 style="font-size:22px">Ваша ссылка</h1><div class="key">${refLink()}</div><button class="btn" id="a">Отправить в Telegram</button><button class="btn ghost" style="margin-top:10px" id="b">Скопировать</button>`);
+ m.querySelector('#a').onclick=()=>share(refLink(),'Подключайся к fa1zzz VPN');m.querySelector('#b').onclick=()=>copy(refLink())}
+function friends(){const n=S.friends.length+1;return `<div class="card"><h1 style="font-size:22px">Общий доступ</h1><div class="mut" style="margin-top:6px">Подключено ${n} из 5</div>
+<div class="slots">${[0,1,2,3,4].map(i=>`<div class="slot ${i<n?'on':''}">${i<n?(i?S.friends[i-1].n[0]:'Я'):''}</div>`).join('')}</div>
+<button class="btn" onclick="shr()">Поделиться подпиской</button></div>
+<h2>ПОДКЛЮЧЕНЫ</h2>${S.friends.length?`<div class="card">${S.friends.map((f,i)=>`<div class="item" style="cursor:default"><div class="ava">${f.n[0]}</div><div><div>${f.n}</div><div class="mut">${f.s} · с ${fmt(f.at)}</div></div><button class="x" onclick="S.friends.splice(${i},1);render()">Убрать</button></div>`).join('')}</div>`:`<div class="card empty">${I.empty}<div>Пока никого нет</div></div>`}`}
+function shr(){if(S.friends.length>=4)return toast('Все 5 мест заняты');share(shareLink(),'Присоединяйся к моей подписке fa1zzz');
+ // DEMO: в продакшене место занимается после подтверждения на сервере
+ setTimeout(()=>{S.friends.push({n:['Алекс','Мария','Иван','Кира'][S.friends.length],s:'Активен',at:Date.now()});if(S.tab==2)render()},2500)}
+function profile(){const a=days()>0;return `<div class="card"><div class="row"><div class="ava" style="width:60px;height:60px;font-size:22px">${S.user.name[0]}</div><div><b style="font-size:19px">${S.user.name}</b><div class="mut">ID ${S.user.id}</div></div><span class="pill ${a?'':'off'}" style="margin-left:auto">${a?'Активна':'Нет'}</span></div>
+<div class="row sp" style="margin-top:16px"><div><div class="mut">Тариф</div><b>${S.sub?S.sub.plan:'—'}</b></div><div style="text-align:right"><div class="mut">Действует до</div><b>${S.sub?fmt(S.sub.end):'—'}</b></div></div></div>
+<div class="stat"><div class="card"><div class="mut">Устройства</div><b>${S.devices} / 5</b></div><div class="card"><div class="mut">Трафик</div><b>Безлимит</b></div></div>
+<div class="card" style="margin-top:14px"><div class="row"><input id="pc" placeholder="Введите промокод"><button class="btn" style="width:auto;padding:15px 20px" onclick="promo()">Ввести</button></div></div>
+<h2>НАСТРОЙКИ</h2><div class="card" style="padding:8px 20px"><div class="item" onclick="themes()">Темы оформления<span class="mut" style="margin-left:auto">›</span></div>
+<div class="item" onclick="open_('https://t.me/fa1zzz_support')">Поддержка<span class="mut" style="margin-left:auto">›</span></div>
+<div class="item" onclick="open_('https://t.me/fa1zzz')">Наш канал<span class="mut" style="margin-left:auto">›</span></div>
+<div class="item" onclick="reissue()">Перевыпустить подписку<span class="mut" style="margin-left:auto">›</span></div></div>`}
+function open_(u){tg&&tg.openTelegramLink?tg.openTelegramLink(u):window.open(u,'_blank')}
+function promo(){const c=$('#pc').value.trim();if(!c)return toast('Введите промокод');toast('Проверка промокода — на сервере (не подключено)')}
+const HT=[['Малиновый','🍓','2B1020','801F4F','FF4F91','2B1020','F5B4D0','42172F','692342','E9A2C0','1C0B15','FF80AB','FF4F91','FFB6D0'],['Аквамарин','🌊','082B35','087E8B','55F2D0','062A2B','A7F4E5','103D48','17616D','9DE3D9','061D26','7CEFD8','55F2D0','A4FFE9'],['Аметист','💜','19102E','51358A','B68CFF','21143A','D2BFFF','291D47','46316F','C5B1EF','100B20','A78BFA','B68CFF','D8C5FF'],['Рубин','🔥','290D18','861F36','FF685A','2B1015','FFC0B8','421824','702A3B','E9A5A5','1B0A11','FF9A91','FF685A','FFC0B8']];
+function hj(t){const c=x=>'#'+x+'FF',w=c('FFFFFF');const[n,,a,b,d,tx,ds,rw,sl,rs,inf,e0,e1,e2]=t;return JSON.stringify({name:n,backgroundGradientRotationAngle:48,backgroundGradientColorIntensity:1,backgroundColors:[c(a),c(b),c(d)],buttonColor:c(d),buttonTextColor:c(tx),buttonTimerColor:c(tx),buttonImageType:'dark',powerIconColor:w,additionalOptionsButtonColor:w,topBarButtonsColor:w,subHeaderButtonColor:w,subsHeaderColor:c(a),disclosureHeaderTextColor:w,disclosureSubHeaderTextColor:c(ds),serverRowBackgroundColor:c(rw),selectedServerRowColor:c(sl),serverRowTitleTextColor:w,serverRowSubTitleTextColor:c(rs),subscriptionInfoBackgroundColor:c(inf),subscriptionInfoTextColor:w,subscriptionTrafficBackgroundColor:c(sl),profileWebPageIconColor:w,supportIconColor:w,elipseColors:[c(e0),c(e1),c(e2)]},null,2)}
+function themes(){const m=modal(`<h1 style="font-size:22px">Темы для HAPP</h1><div class="mut" style="margin:6px 0 10px">Нажмите на тему — код скопируется. Вставьте его в HAPP.</div>${HT.map((t,i)=>`<div class="item" data-i="${i}"><div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#${t[2]},#${t[3]},#${t[4]})"></div><span>${t[1]} ${t[0]}</span><span class="pill" style="margin-left:auto">Копировать</span></div>`).join('')}`);
+ m.querySelectorAll('.item').forEach(e=>e.onclick=()=>{const t=HT[e.dataset.i];copy(hj(t));toast('Тема «'+t[0]+'» скопирована')})}
+function themesOld(){const cs=['#A34DFF','#4D8BFF','#2ED3A0','#FF8A3D'];const m=modal(`<h1 style="font-size:22px;margin-bottom:16px">Темы оформления</h1><div class="row">${cs.map(c=>`<div class="theme ${c==S.theme?'on':''}" style="background:${c}" data-c="${c}"></div>`).join('')}</div>`);
+ m.querySelectorAll('.theme').forEach(e=>e.onclick=()=>{S.theme=e.dataset.c;document.documentElement.style.setProperty('--acc',S.theme);m.remove();render()})}
+function reissue(){if(!S.sub)return toast('Сначала оформите подписку');const m=modal(`<h1 style="font-size:22px">Перевыпустить подписку?</h1><div class="mut" style="margin:8px 0 18px">Старый ключ перестанет работать, вам выдадут новый.</div><button class="btn" id="y">Перевыпустить</button>`);
+ m.querySelector('#y').onclick=()=>{S.key='vless://'+crypto.randomUUID()+'@vpn.example.com:443?type=tcp&security=reality#fa1zzz';m.remove();toast('Новый ключ выдан');showKey()}}
+if(tg){tg.ready();tg.expand();tg.setHeaderColor&&tg.setHeaderColor('#07070D');tg.setBackgroundColor&&tg.setBackgroundColor('#07070D')}
+nav();render();setTimeout(()=>{S.loading=false;render()},700);
+</script></body></html>
